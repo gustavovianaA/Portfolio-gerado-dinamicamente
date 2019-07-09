@@ -1,4 +1,4 @@
-# Portfolio gerado dinâmicamente
+# Portfolio gerado dinamicamente
 
 ## Objetivo
 
