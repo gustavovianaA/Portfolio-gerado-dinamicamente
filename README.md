@@ -1,0 +1,1 @@
+# Portfolio gerado dinâmicamente
