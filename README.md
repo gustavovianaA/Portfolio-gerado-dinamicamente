@@ -19,3 +19,7 @@ Gerar uma página de portfólio estática que exibe itens cadastrados em um banc
 
 As consultas são feitas através de PDO em um banco MySQL, o resultado de uma consulta geral é gravada em um arquivo json. As classes e funções de consulta ficam na pasta server. A página index utiliza Ajax para executar a consulta no backend, depois através do arquivo json monta o layout da página.
 
+### Banco de dados
+
+O banco de dados deve ser criado executando criar_banco.sql
+
