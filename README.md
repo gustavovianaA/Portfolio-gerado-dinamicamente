@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Gerar uma página de portfólio estática que exibe itens cadastrados em um banco de dados.
+Gerar uma página de portfólio com um determinado layout que obtêm itens cadastrados de um banco de dados. Separar as camadas cliente e servidor.
 
 ## Vantagens
 
