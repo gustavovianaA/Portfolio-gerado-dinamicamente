@@ -91,7 +91,7 @@
         });
 
 	
-$.getJSON('server/lista.json',function(data){
+$.getJSON('server/json/lista.json',function(data){
 
 var output = "";
  
@@ -143,7 +143,7 @@ $.ajax({
         console.log("completou");
         });
 
-$.getJSON('server/alvo.json',function(data){
+$.getJSON('server/json/alvo.json',function(data){
 
 
 var output = "<ul>" + 
@@ -151,7 +151,8 @@ var output = "<ul>" +
 "<li>" + data['titulo'] + "</li>"+
 "<li>" + data['descricao'] + "</li>"+
 "<li>" + data['tecnologias'] + "</li>"+
-"<li>" + data['imgCaminho'] + "</li>";
+"<li>" + data['imgCaminho'] + "</li>" +
+"<li>" + data['link'] + "</li>";
 
 
 

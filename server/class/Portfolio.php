@@ -7,6 +7,7 @@ class Portfolio{
 	private $descricao;
 	private $tecnologias;
 	private $imgCaminho;
+	private $link;
 
 	public function getId(){
 		return $this->id;
@@ -46,7 +47,15 @@ class Portfolio{
 
 	public function setImgCaminho($value){
 		$this->imgCaminho = $value;
-	}	
+	}
+
+	public function getLink(){
+		return $this->link;
+	}
+
+	public function setLink($value){
+		$this->link = $value;
+	}		
 
 	public static function listar(){
 		$sql = new Database();
@@ -73,6 +82,7 @@ class Portfolio{
 		$this->setDescricao($row['descricao']);
 		$this->setTecnologias($row['tecnologias']);
         $this->setImgCaminho($row['imgCaminho']);
+        $this->setLink($row['link']);
 
 		}
 
@@ -86,7 +96,8 @@ class Portfolio{
 			"titulo"=>$this->getTitulo(),
 			"descricao"=>$this->getDescricao(),
 			"tecnologias"=>$this->getTecnologias(),
-			"imgCaminho"=>$this->getImgCaminho()
+			"imgCaminho"=>$this->getImgCaminho(),
+			"link"=>$this->getLink()
 
 		));
 
