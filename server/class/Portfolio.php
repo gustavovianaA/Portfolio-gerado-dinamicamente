@@ -54,31 +54,44 @@ class Portfolio{
 	    return $sql->select("SELECT *FROM port_itens ORDER BY id;");
 	}
 
+    
+    public function loadById($id){
 
-	public static function exibirTudo(){
-    	$lista = Portfolio::listar();
+		$sql = new Database();
 
-        $carousel_active = "<div class='itens row carousel-item active'>";
-        $carousel = "<div class='itens row carousel-item'>";
-        $k = 0; 
+		$results = $sql->select("SELECT * FROM port_itens WHERE id = :ID", array(
+			":ID"=>$id
+		));
 
-    	$output =  $carousel_active;
+		if (count($results) > 0) {
+        
+        $row = $results[0];
+         
 
-    	foreach($lista as $row){
-    		$k++;
+		$this->setId($row['id']);
+		$this->setTitulo($row['titulo']);
+		$this->setDescricao($row['descricao']);
+		$this->setTecnologias($row['tecnologias']);
+        $this->setImgCaminho($row['imgCaminho']);
 
-    		$output .= "<div class='col-3 d-inline-block mx-0 px-0'><img src='" . $row['imgCaminho'] ."' class='img-fluid d-iline'></div>";
-    		
+		}
 
-    		if(($k%3) == 0){
-    		$output .= "</div>" . $carousel;	
-    		}
 	}
 
-    	$output .= "</div>";
 
-    	echo $output;
-}
+	public function __toString(){
+
+		return json_encode(array(
+			"id"=>$this->getId(),
+			"titulo"=>$this->getTitulo(),
+			"descricao"=>$this->getDescricao(),
+			"tecnologias"=>$this->getTecnologias(),
+			"imgCaminho"=>$this->getImgCaminho()
+
+		));
+
+	}
+
 
 
 }
