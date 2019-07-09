@@ -23,3 +23,17 @@ As consultas são feitas através de PDO em um banco MySQL, o resultado de uma c
 
 O banco de dados deve ser criado executando criar_banco.sql
 
+### Preview
+
+#### Index
+
+<img src="img/view1.png"></br>
+
+#### Clique no Item
+
+<img src="img/view2.png"></br>
+
+#### Admin
+
+<img src="img/view3.png"></br>
+
