@@ -55,6 +55,14 @@ class Portfolio{
 
 	public function setLink($value){
 		$this->link = $value;
+	}
+
+	public function __construct($titulo = "",$descricao = "",$tecnologias = "",$imgCaminho = "",$link = ""){
+		$this->titulo = $titulo;
+		$this->descricao = $descricao;
+		$this->tecnologias = $tecnologias;
+		$this->imgCaminho = $imgCaminho;
+		$this->link = $link;
 	}		
 
 	public static function listar(){
@@ -86,6 +94,19 @@ class Portfolio{
 
 		}
 
+	}
+
+
+	public function insert(){
+		$sql = new Database();
+
+		$sql->query("INSERT INTO port_itens (titulo,descricao,tecnologias,imgCaminho,link) VALUES (:TITULO,:DESCRICAO,:TECNOLOGIAS,:IMG,:LINK);", array(
+			":TITULO"=>$this->getTitulo(),
+			":DESCRICAO"=>$this->getDescricao(),
+			":TECNOLOGIAS"=>$this->getTecnologias(),
+			":IMG"=>$this->getImgCaminho(),
+			":LINK"=>$this->getLink(),
+			));
 	}
 
 

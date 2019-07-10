@@ -11,7 +11,3 @@ imgCaminho VARCHAR(256) NOT NULL,
 link VARCHAR(256) NOT NULL
 );
 
-INSERT INTO port_itens(titulo,descricao,tecnologias,imgCaminho,link) VALUES('Exemplo1' , 'Apenas o exemplo1' , 'jQuery/Bootstrap/PHP','img/meuwebsite.png','https://www.gustavovianadev.com.br');
-INSERT INTO port_itens(titulo,descricao,tecnologias,imgCaminho,link) VALUES('Exemplo2' , 'Apenas o exemplo2' , 'jQuery/Bootstrap/PHP','img/meuwebsite.png','https://www.gustavovianadev.com.br');
-INSERT INTO port_itens(titulo,descricao,tecnologias,imgCaminho,link) VALUES('Exemplo3' , 'Apenas o exemplo3' , 'jQuery/Bootstrap/PHP','img/meuwebsite.png','https://www.gustavovianadev.com.br');
-INSERT INTO port_itens(titulo,descricao,tecnologias,imgCaminho,link) VALUES('Exemplo4' , 'Apenas o exemplo4' , 'jQuery/Bootstrap/PHP','img/meuwebsite.png','https://www.gustavovianadev.com.br');

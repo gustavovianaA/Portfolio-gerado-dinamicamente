@@ -2,6 +2,7 @@
 require_once("config.php");
 
 function listarPortfolio(){
+clearstatcache();
 $lista = Portfolio::listar();
 foreach($lista as $row){
 
@@ -13,7 +14,7 @@ foreach($lista as $row){
 	$html.= "<p><span class='tags'>Título:</span> " . $row['titulo'] . "</p>";
 	$html.= "<p><span class='tags'>Descrição:</span> " . $row['descricao'] . "</p>";
 	$html.= "<p><span class='tags'>Tecnologias:</span> " .$row['tecnologias'] . "</p>";
-	$html.= "<p><span class='tags'>Link:</span><a href='" . $row['link'] ."' target='_blank'> " . $row['link'] . "</a></p>";
+	$html.= "<p><span class='tags'>Link:</span><a href='//" . $row['link'] ."' target='_blank'> " . $row['link'] . "</a></p>";
 	$html.= "</div>";
 	$html.= "<div class='col-2'>";
 	$html.= "<a href='edit&id=".$row['id']."'><button type='button' class='my-2 btn btn-success btn-block'>Editar</button></a>";
@@ -63,4 +64,4 @@ echo $html . "<hr>";
 	</main>
 
 </body>
-</html>>
+</html>

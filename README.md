@@ -11,7 +11,6 @@ Gerar uma página de portfólio com um determinado layout que obtêm itens cadas
 ## Metas
 
 <ol>
-<li>Desenvolvimento da parte de exibição de detalhes de item.(frontend e backend)</li>
 <li>Painel administrativo, CRUD no banco de itens de portfólio.</li>
 </ol>
 
