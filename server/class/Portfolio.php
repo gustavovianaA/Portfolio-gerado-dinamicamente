@@ -109,6 +109,33 @@ class Portfolio{
 			));
 	}
 
+	public static function delete($id){
+
+		$sql = new Database();
+
+		$results = $sql->select("DELETE FROM port_itens WHERE id = :ID", array(
+			":ID"=>$id
+		));
+
+
+	}
+
+		public function edit($id,$titulo,$descricao,$tecnologias,$img,$link){
+		$sql = new Database();
+
+		$sql->query("UPDATE port_itens
+		SET titulo = :TITULO, descricao = :DESCRICAO, tecnologias = :TECNOLOGIAS, imgCaminho = :IMG, link = :LINK  
+		WHERE id = :ID;", array(
+			":ID"=>$id,
+			":TITULO"=>$titulo,
+			":DESCRICAO"=>$descricao,
+			":TECNOLOGIAS"=>$tecnologias,
+			":IMG"=>$img,
+			":LINK"=>$link,
+			));
+
+	}
+
 
 	public function __toString(){
 

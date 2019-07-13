@@ -17,8 +17,8 @@ foreach($lista as $row){
 	$html.= "<p><span class='tags'>Link:</span><a href='//" . $row['link'] ."' target='_blank'> " . $row['link'] . "</a></p>";
 	$html.= "</div>";
 	$html.= "<div class='col-2'>";
-	$html.= "<a href='edit&id=".$row['id']."'><button type='button' class='my-2 btn btn-success btn-block'>Editar</button></a>";
-	$html.= "<a href='delete&id=".$row['id']."'><button type='button' class='my-2 btn btn-danger btn-block'>Deletar</button></a>";
+	$html.= "<a href='edit.php?id=".$row['id']."'><button type='button' class='my-2 btn btn-success btn-block'>Editar</button></a>";
+	$html.= "<a href='delete.php?id=".$row['id']."'><button type='button' class='my-2 btn btn-danger btn-block'>Deletar</button></a>";
 	$html.= "</div>";
 	$html.= "</div>";
 
