@@ -47,6 +47,11 @@ header("Location: index.php");
 
 		<form method="post">
 		<div class="row">
+
+			<div class="col-4">
+			<img class="img-fluid" src="../<?php echo $target->getImgCaminho();?>" >
+		</div>
+		
 		<div class="col-4">
 		<div class="form-group">
 		<label for="titulo">Título</label>	

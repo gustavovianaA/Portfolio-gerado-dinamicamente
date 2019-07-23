@@ -40,6 +40,11 @@ header("Location: index.php");
 
 		<form method="post">
 		<div class="row">
+	
+		<div class="col-4">
+			<img class="img-fluid" src="../<?php echo $target->getImgCaminho();?>" >
+		</div>
+
 		<div class="col-4">
 		<div class="form-group">
 		<label for="titulo">Título</label>	
@@ -63,10 +68,14 @@ header("Location: index.php");
 		<textarea disabled class="form-control" name="descricao" id="descricao" rows="8"><?php echo $target->getDescricao();?></textarea>
 		</div>
 		</div>
+		
+		
 		</div>
 
         <input type="submit" id="deletar" name="deletar" class="btn btn-primary btn-block" value="Quero deletar">
         </form>
+        
+
                 <a href="index.php" ><button class="my-3 btn btn-danger btn-block">Voltar</button></a>
 	
 	</main>

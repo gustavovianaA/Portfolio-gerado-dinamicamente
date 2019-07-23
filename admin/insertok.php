@@ -6,8 +6,8 @@ $titulo = $_POST['titulo'];
 $tecnologias = $_POST['tec'];
 $link = $_POST['link'];
 $descricao = $_POST['desc'];
-$imgCaminho = $_POST['img'];
-
+$imgCaminho = "img" . DIRECTORY_SEPARATOR . $_POST['img'];
+$imgCaminho = str_replace(" ","_",$imgCaminho);
 $novoItem = new Portfolio($titulo,$descricao,$tecnologias,$imgCaminho,$link);
 $novoItem->insert();
 }

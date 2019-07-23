@@ -25,7 +25,7 @@
 
 		<h2>Inserir item</h2>
 
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 		<div class="row">
 		<div class="col-4">
 		<div class="form-group">
@@ -42,7 +42,13 @@
 		<label for="link">Link </label>
 		<input class="form-control" type="text" name="link" id="link">
 		</div>
-		</div>
+        
+        <div class="form-group">
+        <label for="imgUpload">Imagem (png)</label>
+        <input type="file" name="imgUpload" id="imgUpload">
+        </div>
+		
+        </div>
         
         <div class="col-4">
         <div class="form-group">
@@ -85,6 +91,12 @@
     		itemData.push($("#link").val());	
     		}
 
+            if($('#imgUpload').val() != ""){
+            validate++;
+            var img = $('#imgUpload').val().replace(/C:\\fakepath\\/i, '');
+            itemData.push(img);    
+            }
+
     		if($("#descricao").val() != ""){
     		validate++;
     		itemData.push($("#descricao").val());	
@@ -93,7 +105,7 @@
            
             console.log(validate);
 
-            if(validate===4){
+            if(validate===5){
             return 1;	
             }else{
             return 0;	
@@ -105,23 +117,46 @@
 
 
     	$("#inserir").click(function(){
+
+  
 	
 		var valido = validate();
 
-        if(valido == 1){
-    	$.ajax({
+     
+
+        var file_data = $('#imgUpload').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+    
+
+        if(valido){
+
+        $.ajax({
+        url: "uploadimg.php",
+        type: "POST",
+        data:  form_data,
+        contentType: false,
+        cache: false,
+        processData:false
+        });
+
+
+     	$.ajax({
         url: "insertok.php",
         type: "POST",
-        data: "v="+valido+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&desc="+itemData[3]+"&img=img/imgadmin.png",
+        data: "v="+valido+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&img="+itemData[3]+"&desc="+itemData[4],
         dataType: "html"
         }).done(function(resposta) {
-        window.location.replace("index.php")
+        window.location.replace("index.php");
         });
-    	}
+    	
+        }
 
-    	});
+        });
+     });
 
-    });
+
+
 	</script>
 
 </body>
