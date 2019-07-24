@@ -1,22 +1,40 @@
 <?php
 require_once('config.php');
-if(isset($_GET['id']) && $_GET['id'] != ''){
+ 
+
+ if(isset($_GET['id']) && $_GET['id'] != ''){
 $id = $_GET['id'];
 $target = new Portfolio;
 $target->loadById($id);
+}
 
-if(isset($_POST['editar'])){
+
+if(isset($_POST['v']) && $_POST['v'] ==  '1'  ){
+ $id = intval($_POST['id']);
+
+$target = new Portfolio;
+$target->loadById($id);
+
 $titulo = $_POST['titulo'];
-$descricao = $_POST['descricao'];
-$tecnologias = $_POST['tecnologias'];
-$img = 'img/meuwebsite.png';
+$descricao = $_POST['desc']; 
+$tecnologias = $_POST['tec'];
+
+$img = $_POST['img'];
+if($img === "default"){
+$img = $target->getImgCaminho();    
+}else{
+$img  = "img" . DIRECTORY_SEPARATOR . $_POST['img'];
+$img  = str_replace(" ","_",$img ); 
+}
+
 $link = $_POST['link'];
 
-
+  
 $target->edit($id,$titulo,$descricao,$tecnologias,$img,$link);
-header("Location: index.php");
+ 
 }
-}
+
+  
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -32,6 +50,12 @@ header("Location: index.php");
 		.inserir{
 			width: 40%;
 			}
+		#imagemTroca{
+			display:none;
+		}	
+        #id{
+            display: none;
+        }
 	</style>
 </head>
 <body>
@@ -46,11 +70,14 @@ header("Location: index.php");
 		<h2>Editar item</h2>
 
 		<form method="post">
+
+        <span id="id" ><?php echo $target->getId()?></span>
 		<div class="row">
 
 			<div class="col-4">
 			<img class="img-fluid" src="../<?php echo $target->getImgCaminho();?>" >
 		</div>
+
 		
 		<div class="col-4">
 		<div class="form-group">
@@ -67,6 +94,16 @@ header("Location: index.php");
 		<label for="link">Link </label>
 		<input class="form-control" type="text" name="link" id="link" value=<?php echo $target->getLink();?>>
 		</div>
+
+		<div class="form-group ">
+			<div id="trocarImagem" class="btn btn-info"  >Trocar Imagem</div>
+		</div>
+
+		<div class="form-group" id="imagemTroca">
+        <label for="imgUpload">Imagem (png)</label>
+        <input type="file" name="imgUpload" id="imgUpload">
+        </div>
+
 		</div>
         
         <div class="col-4">
@@ -77,8 +114,10 @@ header("Location: index.php");
 		</div>
 		</div>
 
-        <input type="submit" id="editar" name="editar" class="btn btn-primary btn-block" value="Salvar">
+        
         </form>
+        <button type="submit" id="editar" name="editar" class="btn btn-primary btn-block" >
+        Salvar</button>        
                 <a href="index.php" ><button class="my-3 btn btn-danger btn-block">Voltar</button></a>
 	
 	</main>
@@ -86,6 +125,114 @@ header("Location: index.php");
 <!--bootstrap.js e jquery-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<script type="text/javascript" >
+$(document).ready(function(){
+	$("#trocarImagem").click(function(){
+		$("#imagemTroca").show();
+	}); 
+});	
+</script> 
 
+<script type="text/javascript">
+    $(document).ready(function(){
+    	
+    		var imgUpload = '';
+            var itemData = new Array();
+
+    	function validate(){
+            itemData = [];
+    		var validate = 0;
+
+    		if($("#titulo").val() != ""){
+    		validate++;	
+   			itemData.push($("#titulo").val());
+      		}
+
+    		if($("#tecnologias").val() != ""){
+    		validate++;
+    		itemData.push($("#tecnologias").val());	
+    		}
+
+    		if($("#link").val() != ""){
+    		validate++;
+    		itemData.push($("#link").val());	
+    		}
+
+            var imgUpload = $('#imgUpload').val(); 
+            if(imgUpload == "" )
+ 			imgUpload = "default";
+
+            if(imgUpload != ""){
+            validate++;
+            var img = imgUpload.replace(/C:\\fakepath\\/i, '');
+            itemData.push(img);    
+            }
+
+    		if($("#descricao").val() != ""){
+    		validate++;
+    		itemData.push($("#descricao").val());	
+    		}
+
+           
+            console.log(validate);
+
+            if(validate===5){
+            return 1;	
+            }else{
+            return 0;	
+            }
+
+    	}
+        
+
+
+
+    	$("#editar").click(function(){
+
+  
+	
+		var valido = validate();
+
+     
+
+        var file_data = $('#imgUpload').prop('files')[0];   
+        var form_data = new FormData();                  
+        form_data.append('file', file_data);
+     
+
+        if(valido){
+            theId = $("#id").html();
+           
+              
+        $.ajax({ 
+        url: "uploadimg.php",	
+        type: "POST",
+        data:  form_data,
+        contentType: false,
+        cache: false,
+        processData:false
+        }); 
+
+            
+        $.ajax({ 
+       // url: "editok.php",   
+        type: "POST",
+        data: "v="+valido+"&id="+theId+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&img="+itemData[3]+"&desc="+itemData[4],
+        dataType: "html",
+        
+    	
+        }).done(function(resposta) {
+        window.location.replace("index.php");
+         
+        })   
+    	
+        }
+
+        });
+     }); 
+
+
+	</script>
+ 
 </body>
 </html>
