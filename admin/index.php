@@ -48,7 +48,8 @@ echo $html . "<hr>";
     	Administrar Portfólio</h1></div>
     	<div class="row bg-white border-bottom pt-2 pb-3 px-4">
    		<div class="col-3"><a href="insert.php"><button type="button" class="inserir btn btn-info btn-block ">Inserir</button></a></div>
-		<div class="col-6">
+   		<div class="col-3"><button type="button" class="gerar btn btn-success btn-block btn-success ">Gerar HTML Estático</button></a></div>
+		<div class="col-3">
 			<form method="POST" action="search.php">
 				<div>
 					<input type="text" placeholder="Pesquisar" class="align-middle">
@@ -63,6 +64,30 @@ echo $html . "<hr>";
 	<main class="container">		
 		<?php listarPortfolio()?>
 	</main>
+
+
+<!--bootstrap.js e jquery-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--Scripts da página-->
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".gerar").click(function(){
+		$.ajax({
+
+		url: "generate.php",
+        type: "POST",
+        data: "",
+        dataType: "html",
+        success: function(data){
+        	console.log(data);
+        }     
+             });
+
+ 
+	});
+});	
+</script>
 
 </body>
 </html>
