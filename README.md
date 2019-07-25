@@ -11,7 +11,7 @@ Gerar uma página de portfólio com um determinado layout que obtêm itens cadas
 ## Metas
 
 <ol>
-<li>Painel administrativo, CRUD no banco de itens de portfólio.</li>
+<li>Opção: Gerar um HTML estático com as configurações atuais do Admin.</li>
 </ol>
 
 ### Detalhes

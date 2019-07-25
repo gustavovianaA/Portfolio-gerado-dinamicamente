@@ -1,3 +1,16 @@
+<?php
+require_once("config.php");
+if(isset($_POST['v']) && $_POST['v'] == '1'){
+$titulo = $_POST['titulo'];
+$tecnologias = $_POST['tec'];
+$link = $_POST['link'];
+$descricao = $_POST['desc'];
+$imgCaminho = "img" . DIRECTORY_SEPARATOR . $_POST['img'];
+$imgCaminho = str_replace(" ","_",$imgCaminho);
+$novoItem = new Portfolio($titulo,$descricao,$tecnologias,$imgCaminho,$link);
+$novoItem->insert();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -40,11 +53,11 @@
 
 		<div class="form-group">
 		<label for="link">Link </label>
-		<input class="form-control" type="text" name="link" id="link">
+		<input class="form-control" type="text" name="link" id="link" placeholder="www.nomedosite.com | nomedosite.com">
 		</div>
         
         <div class="form-group">
-        <label for="imgUpload">Imagem (png)</label>
+        <label for="imgUpload">Imagem (jpg/jpeg/png/gif)</label>
         <input type="file" name="imgUpload" id="imgUpload">
         </div>
 		
@@ -137,12 +150,14 @@
         data:  form_data,
         contentType: false,
         cache: false,
-        processData:false
+        processData:false,
+        success: function(data){
+            console.log(data);
+        }
         });
 
 
      	$.ajax({
-        url: "insertok.php",
         type: "POST",
         data: "v="+valido+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&img="+itemData[3]+"&desc="+itemData[4],
         dataType: "html"

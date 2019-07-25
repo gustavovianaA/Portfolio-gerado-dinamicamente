@@ -38,8 +38,7 @@ echo $html . "<hr>";
 			font-weight: 700;}
 		main{
 			margin-top: 200px;}
-		.inserir{
-			width: 40%;}
+		
 	</style>
 </head>
 <body>
@@ -47,8 +46,8 @@ echo $html . "<hr>";
     <header class="fixed-top bg-white">
     	<div class="bg-secondary "><h1 class=" container bg-secondary text-white py-4">
     	Administrar Portfólio</h1></div>
-    	<div class="row bg-white border-bottom pt-2 pb-3">
-   		<div class="col-6 text-right"><a href="insert.php"><button type="button" class="inserir btn btn-info align-middle">Inserir</button></a></div>
+    	<div class="row bg-white border-bottom pt-2 pb-3 px-4">
+   		<div class="col-3"><a href="insert.php"><button type="button" class="inserir btn btn-info btn-block ">Inserir</button></a></div>
 		<div class="col-6">
 			<form method="POST" action="search.php">
 				<div>
@@ -57,6 +56,8 @@ echo $html . "<hr>";
 				</div>
 			</form>
 		</div>
+		   		<a href="../" class="col-3"><span class="btn btn-danger btn-block">Sair</span></a>
+
     	</div>
     </header> 
 	<main class="container">		

@@ -38,6 +38,8 @@
 		transition: 1s;}
 		.alvo-active{
 		height: 400px;}
+		#alvoimg{
+		max-height: 390px;}
 		.portfolioItem , .close{
 		cursor:pointer;}
 	</style>
@@ -45,6 +47,7 @@
 <body>
 <!--Área de Conteúdo -->
 <main class="container-fluid">
+	<a href="admin/"><span class="btn btn-info">Admin</span></a>
 <div class="row justify-content-center"><h1>Portfólio</h1></div>
 <div class="alvo row"></div>
 <div class="portfolio row justify-content-center"></div>
@@ -100,7 +103,7 @@ setTimeout(function(){
 $.getJSON('server/json/alvo.json',function(data){
 var output =
 "<div class='col-6'>"+
-"<img src='"+data['imgCaminho']+"' class='img-fluid'></div>"+
+"<img src='"+data['imgCaminho']+"' class='img-fluid' id='alvoimg'></div>"+
 "<div class='col-5'>"+
 "<h3>"+data['titulo']+"</h3>"+
 "<p>Tecnologias: "+data['tecnologias']+"</p>"+
