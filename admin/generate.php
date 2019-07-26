@@ -16,7 +16,7 @@ foreach($contentArray as $c){
 $content .= $c;
 }
 
-var_dump($lista);
+
 
 
 $fp = fopen($basedir . 'gerado.html', 'w');

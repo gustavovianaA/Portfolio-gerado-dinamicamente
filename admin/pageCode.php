@@ -1,28 +1,32 @@
 <?php
 function listarPortfolio($list){
 $content = "<div class='portfolio row justify-content-center'>";
+
 foreach($list as $row){
-$content .= "<div class='col-3 portfolioItem mx-0 px-0' id='" . $row['id'] . "'>";
-$content .= "<div class='portfolioContent'>";
-$content .= "<div class='port portfolioTitulo'>". $row['titulo']."</div>";
-$content .= "<img class='port potfolioImg img-fluid' src='".$row['imgCaminho']."'></div></div>";
+
+
+
+$contentView = "<div class='col-3 portfolioItem mx-0 px-0' id='" . $row['id'] . "'>";
+$content.= $contentView;
+$contentData  = "\n<!-- Dados do item -->\n";
+$contentData .= "<div class='dataPort' id='" . $row['id']."'>";
+$contentData .= "<span class='dataPortTitle' id='". $row['titulo'] ."'></span>";
+$contentData .= "<span class='dataPortDesc' >".$row['descricao']."</span>";
+$contentData .= "<span class='dataPortTec' >".$row['tecnologias'] ."</span>";
+$contentData .= "<span class='dataPortImg' >". $row['imgCaminho'] ."</span>";
+$contentData .= "<span class='dataPortLink' >". $row['link'] ."</span>";
+$contentData .= "</div>";
+$content .= $contentData;
+$content .= "\n<!-- Visualização do item -->\n";
+$contentView  = "<div class='portfolioContent'>";
+$contentView .= "<div class='port portfolioTitulo'>". $row['titulo']."</div>";
+$contentView .= "<img class='port potfolioImg img-fluid' src='".$row['imgCaminho']."'></div></div>";
+$content .= $contentView;
 }
+
 $content.= "</div>";
 $content.= "</main>";
 return $content;}
-
-function listDetails($list){
-$content = "";
-foreach($list as $row){
-$content .= "<div class='dataPort' id='" . $row['id']."'>";
-$content .= "<span class='dataPortTitle' id='". $row['titulo'] ."'></span>";
-$content .= "<span class='dataPortDesc' id='". $row['decricao'] ."'></span>";
-$content .= "<span class='dataPortTec' id='". $row['tecnologias'] ."'></span>";
-$content .= "<span class='dataPortImg' id='". $row['imgCaminho'] ."'></span>";
-$content.= "</div>";
-} 	
-return $content;
-}
 
 
 function writePage($list){
@@ -64,11 +68,13 @@ $content['head'] ="<!DOCTYPE html>
 		visibility: hidden;
 		transition: 1s;}
 		.alvo-active{
-		height: 400px;}
+		height: 350px;}
 		#alvoimg{
-		max-height: 390px;}
+		max-height: 340px;}
 		.portfolioItem , .close{
 		cursor:pointer;}
+			.dataPort{
+		display: none;}
 	</style>
 </head>";
 
@@ -82,14 +88,14 @@ $content['scriptDetails'] = "<div class='alvo row'>
 <div class='col-6'>
 <img src='' class='img-fluid' id='alvoimg'></div>
 <div class='col-5'>
-<h3 id='alvotitulo'>Titulo</h3>
-<p id='alvotec'>Tecnologias: </p>
-<p id='alvodesc'>Descrição: </p>
-<p id='alvolink'>Acesse: <a href=''>link</a></p>	
+<h3>Titulo: <span id='alvotitulo'></span></h3>
+<p>Tecnologias: <span id='alvotec'></span></p>
+<p>Descrição: <span id='alvodesc'></span></p>
+<p>Acesse: <a href='' id='alvolink'></a></p>		
 </div>
 <div class='col-1'><span class='close'>X</span>
 </div>
-</div>" . listDetails($list);
+</div>";
 
 
 $content['itens'] = listarPortfolio($list);  
@@ -110,10 +116,24 @@ $(this).find('.portfolioTitulo').fadeOut(400);
 
 $content['scriptsItemDetail'] = "<script>
 $('.portfolioItem').click(function(){
+$('.alvo').css('visibility','visible');
 $('.alvo').addClass('alvo-active');
+var item = $(this).find('.dataPort');
 var targetId = $(this).attr('id');
+var titulo = item.find('.dataPortTitle').html();
+var tecnologias = item.find('.dataPortTec').html();
+var descricao = item.find('.dataPortDesc').html();
+var link = item.find('.dataPortLink').html();
+var img = item.find('.dataPortImg').html();
 
-$('.alvo').css('visibility','visible'); 
+
+$('#alvotitulo').html(titulo);
+$('#alvotec').html(tecnologias);
+$('#alvodesc').html(descricao);
+$('#alvolink').html(link);
+$('#alvolink').attr('href',link);
+$('#alvoimg').attr('src',img);
+
 });	
 </script>";
 
