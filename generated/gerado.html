@@ -32,9 +32,11 @@
 		.alvo{
 		height: 0px;
 		visibility: hidden;
-		transition: 1s;}
+		transition: 1s;
+	    opacity: 0;}
 		.alvo-active{
-		height: 350px;}
+		height: 350px;
+		opacity: 1;}
 		#alvoimg{
 		max-height: 340px;}
 		.portfolioItem , .close{
@@ -50,30 +52,22 @@
 <div class='col-6'>
 <img src='' class='img-fluid' id='alvoimg'></div>
 <div class='col-5'>
-<h3>Titulo: <span id='alvotitulo'></span></h3>
+<h3><span id='alvotitulo'></span></h3>
 <p>Tecnologias: <span id='alvotec'></span></p>
 <p>Descrição: <span id='alvodesc'></span></p>
-<p>Acesse: <a href='' id='alvolink'></a></p>		
+<p>Acesse: <a href='' id='alvolink' target='blank'></a></p>		
 </div>
 <div class='col-1'><span class='close'>X</span>
 </div>
-</div><div class='portfolio row justify-content-center'><div class='col-3 portfolioItem mx-0 px-0' id='84'>
+</div><div class='portfolio row justify-content-center'><div class='col-3 portfolioItem mx-0 px-0' id='88'>
 <!-- Dados do item -->
-<div class='dataPort' id='84'><span class='dataPortTitle' id='Google'></span><span class='dataPortDesc' >exemplo</span><span class='dataPortTec' >google</span><span class='dataPortImg' >img/143300.gif</span><span class='dataPortLink' >www.google.com</span></div>
+<div class='dataPort' id='88'><span class='dataPortTitle'>Clínica Okamura </span><span class='dataPortDesc'>Desenvolvimento de um tema Wordpress para o site de um fisioterapeuta.</span><span class='dataPortTec'>Wordpress / Bootstrap</span><span class='dataPortImg'>img/okamura_thumb.png</span><span class='dataPortLink'>okamura.gustavovianadev.com.br</span></div>
 <!-- Visualização do item -->
-<div class='portfolioContent'><div class='port portfolioTitulo'>Google</div><img class='port potfolioImg img-fluid' src='img/143300.gif'></div></div><div class='col-3 portfolioItem mx-0 px-0' id='85'>
+<div class='portfolioContent'><div class='port portfolioTitulo'>Clínica Okamura </div><img class='port potfolioImg img-fluid' src='img/okamura_thumb.png'></div></div><div class='col-3 portfolioItem mx-0 px-0' id='90'>
 <!-- Dados do item -->
-<div class='dataPort' id='85'><span class='dataPortTitle' id='Exemplo n'></span><span class='dataPortDesc' >gnf</span><span class='dataPortTec' >ghng</span><span class='dataPortImg' >img/okamura_thumb.png</span><span class='dataPortLink' >gngfnf</span></div>
+<div class='dataPort' id='90'><span class='dataPortTitle'>Meu Website</span><span class='dataPortDesc'>Mostrar minhas habilidades, objetivos e portfólio</span><span class='dataPortTec'>Bootstrap / jQuery / PHP</span><span class='dataPortImg'>img/meuwebsite.png</span><span class='dataPortLink'>www.gustavovianadev.com.br</span></div>
 <!-- Visualização do item -->
-<div class='portfolioContent'><div class='port portfolioTitulo'>Exemplo n</div><img class='port potfolioImg img-fluid' src='img/okamura_thumb.png'></div></div><div class='col-3 portfolioItem mx-0 px-0' id='86'>
-<!-- Dados do item -->
-<div class='dataPort' id='86'><span class='dataPortTitle' id='gbfgbfg'></span><span class='dataPortDesc' >gfndg</span><span class='dataPortTec' >gfndf</span><span class='dataPortImg' >img/Captura_de_tela_de_2019-07-07_17-59-33.png</span><span class='dataPortLink' >hgjmfghmfg</span></div>
-<!-- Visualização do item -->
-<div class='portfolioContent'><div class='port portfolioTitulo'>gbfgbfg</div><img class='port potfolioImg img-fluid' src='img/Captura_de_tela_de_2019-07-07_17-59-33.png'></div></div><div class='col-3 portfolioItem mx-0 px-0' id='87'>
-<!-- Dados do item -->
-<div class='dataPort' id='87'><span class='dataPortTitle' id='teste '></span><span class='dataPortDesc' >fdgdf</span><span class='dataPortTec' >fdgdf</span><span class='dataPortImg' >img/65372265_1325554920925682_754953481386721280_n.jpg</span><span class='dataPortLink' >dfgdfg</span></div>
-<!-- Visualização do item -->
-<div class='portfolioContent'><div class='port portfolioTitulo'>teste </div><img class='port potfolioImg img-fluid' src='img/65372265_1325554920925682_754953481386721280_n.jpg'></div></div></div></main><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<div class='portfolioContent'><div class='port portfolioTitulo'>Meu Website</div><img class='port potfolioImg img-fluid' src='img/meuwebsite.png'></div></div></div></main><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script><script type='text/javascript'>
 $(document).ready(function(){
 $('.portfolioItem').mouseenter(function(){ 
@@ -85,7 +79,7 @@ $(this).find('.portfolioTitulo').fadeOut(400);
 });
 </script><script>
 $('.portfolioItem').click(function(){
-$('.alvo').css('visibility','visible');
+setTimeout(function(){ $('.alvo').css('visibility','visible');},700);
 $('.alvo').addClass('alvo-active');
 var item = $(this).find('.dataPort');
 var targetId = $(this).attr('id');
@@ -100,9 +94,13 @@ $('#alvotitulo').html(titulo);
 $('#alvotec').html(tecnologias);
 $('#alvodesc').html(descricao);
 $('#alvolink').html(link);
-$('#alvolink').attr('href',link);
+$('#alvolink').attr('href','//' + link);
 $('#alvoimg').attr('src',img);
 
 });	
+$('.close').click(function(){
+$('.alvo').removeClass('alvo-active');
+setTimeout(function(){ $('.alvo').css('visibility','hidden');},0); 
+});
 </script></body>
 </html>

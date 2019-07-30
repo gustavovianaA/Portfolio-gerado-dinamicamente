@@ -10,11 +10,11 @@ $contentView = "<div class='col-3 portfolioItem mx-0 px-0' id='" . $row['id'] . 
 $content.= $contentView;
 $contentData  = "\n<!-- Dados do item -->\n";
 $contentData .= "<div class='dataPort' id='" . $row['id']."'>";
-$contentData .= "<span class='dataPortTitle' id='". $row['titulo'] ."'></span>";
-$contentData .= "<span class='dataPortDesc' >".$row['descricao']."</span>";
-$contentData .= "<span class='dataPortTec' >".$row['tecnologias'] ."</span>";
-$contentData .= "<span class='dataPortImg' >". $row['imgCaminho'] ."</span>";
-$contentData .= "<span class='dataPortLink' >". $row['link'] ."</span>";
+$contentData .= "<span class='dataPortTitle'>" . $row['titulo'] ."</span>";
+$contentData .= "<span class='dataPortDesc'>".$row['descricao']."</span>";
+$contentData .= "<span class='dataPortTec'>".$row['tecnologias'] ."</span>";
+$contentData .= "<span class='dataPortImg'>". $row['imgCaminho'] ."</span>";
+$contentData .= "<span class='dataPortLink'>". $row['link'] ."</span>";
 $contentData .= "</div>";
 $content .= $contentData;
 $content .= "\n<!-- Visualização do item -->\n";
@@ -66,9 +66,11 @@ $content['head'] ="<!DOCTYPE html>
 		.alvo{
 		height: 0px;
 		visibility: hidden;
-		transition: 1s;}
+		transition: 1s;
+	    opacity: 0;}
 		.alvo-active{
-		height: 350px;}
+		height: 350px;
+		opacity: 1;}
 		#alvoimg{
 		max-height: 340px;}
 		.portfolioItem , .close{
@@ -88,10 +90,10 @@ $content['scriptDetails'] = "<div class='alvo row'>
 <div class='col-6'>
 <img src='' class='img-fluid' id='alvoimg'></div>
 <div class='col-5'>
-<h3>Titulo: <span id='alvotitulo'></span></h3>
+<h3><span id='alvotitulo'></span></h3>
 <p>Tecnologias: <span id='alvotec'></span></p>
 <p>Descrição: <span id='alvodesc'></span></p>
-<p>Acesse: <a href='' id='alvolink'></a></p>		
+<p>Acesse: <a href='' id='alvolink' target='blank'></a></p>		
 </div>
 <div class='col-1'><span class='close'>X</span>
 </div>
@@ -116,7 +118,7 @@ $(this).find('.portfolioTitulo').fadeOut(400);
 
 $content['scriptsItemDetail'] = "<script>
 $('.portfolioItem').click(function(){
-$('.alvo').css('visibility','visible');
+setTimeout(function(){ $('.alvo').css('visibility','visible');},700);
 $('.alvo').addClass('alvo-active');
 var item = $(this).find('.dataPort');
 var targetId = $(this).attr('id');
@@ -131,10 +133,14 @@ $('#alvotitulo').html(titulo);
 $('#alvotec').html(tecnologias);
 $('#alvodesc').html(descricao);
 $('#alvolink').html(link);
-$('#alvolink').attr('href',link);
+$('#alvolink').attr('href','//' + link);
 $('#alvoimg').attr('src',img);
 
 });	
+$('.close').click(function(){
+$('.alvo').removeClass('alvo-active');
+setTimeout(function(){ $('.alvo').css('visibility','hidden');},0); 
+});
 </script>";
 
 $content['footer'] = "</body>

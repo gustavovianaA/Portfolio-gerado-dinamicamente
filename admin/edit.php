@@ -9,6 +9,8 @@ $target->loadById($id);
 }
 
 
+
+
 if(isset($_POST['v']) && $_POST['v'] ==  '1'  ){
  $id = intval($_POST['id']);
 
@@ -82,12 +84,12 @@ $target->edit($id,$titulo,$descricao,$tecnologias,$img,$link);
 		<div class="col-4">
 		<div class="form-group">
 		<label for="titulo">Título</label>	
-		<input class="form-control" type="text" name="titulo" id="titulo" value=<?php echo $target->getTitulo();?>>
+		<input class="form-control" type="text" name="titulo" id="titulo" value="<?php echo $target->getTitulo();?>">
 		</div>
 		
 		<div class="form-group">
 		<label for="tecnologias">Tecnologias</label>
-		<input  class="form-control" type="text" name="tecnologias" id="tecnologias" value=<?php echo $target->getTecnologias();?>>
+		<input  class="form-control" type="text" name="tecnologias" id="tecnologias" value="<?php echo $target->getTecnologias();?>">
 		</div>
 
 		<div class="form-group">

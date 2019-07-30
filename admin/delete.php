@@ -48,12 +48,12 @@ header("Location: index.php");
 		<div class="col-4">
 		<div class="form-group">
 		<label for="titulo">Título</label>	
-		<input  disabled class="form-control" type="text" name="titulo" id="titulo" value=<?php echo $target->getTitulo();?>>
+		<input  disabled class="form-control" type="text" name="titulo" id="titulo" value="<?php echo $target->getTitulo();?>">
 		</div>
 		
 		<div class="form-group">
 		<label for="tecnologias">Tecnologias</label>
-		<input disabled class="form-control" type="text" name="tecnologias" id="tecnologias" value=<?php echo $target->getTecnologias();?>>
+		<input disabled class="form-control" type="text" name="tecnologias" id="tecnologias" value="<?php echo $target->getTecnologias();?>">
 		</div>
 
 		<div class="form-group">
