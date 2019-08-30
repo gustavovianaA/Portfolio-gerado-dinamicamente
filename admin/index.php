@@ -52,8 +52,8 @@ echo $html . "<hr>";
 		<div class="col-3">
 			<form method="POST" action="search.php">
 				<div>
-					<input type="text" placeholder="Pesquisar" class="align-middle">
-					<input type="submit" value="ok">
+					<input disabled type="text" placeholder="Pesquisar" class="align-middle">
+					<input disabled type="submit" value="ok">
 				</div>
 			</form>
 		</div>

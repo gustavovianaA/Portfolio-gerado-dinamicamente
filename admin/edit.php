@@ -2,38 +2,34 @@
 require_once('config.php');
  
 
- if(isset($_GET['id']) && $_GET['id'] != ''){
+if(isset($_GET['id']) && $_GET['id'] != ''){
 $id = $_GET['id'];
 $target = new Portfolio;
 $target->loadById($id);
 }
 
-
-
-
-if(isset($_POST['v']) && $_POST['v'] ==  '1'  ){
+if(isset($_POST['titulo'])){
+echo "<br><br><br><br><br><br><br>teste" . $_FILES['imgUpload']['name'];
  $id = intval($_POST['id']);
 
 $target = new Portfolio;
 $target->loadById($id);
 
 $titulo = $_POST['titulo'];
-$descricao = $_POST['desc']; 
-$tecnologias = $_POST['tec'];
+$descricao = $_POST['descricao']; 
+$tecnologias = $_POST['tecnologias'];
 
-$img = $_POST['img'];
+$img = $_FILES['imgUpload']['name'];
 if($img === "default"){
 $img = $target->getImgCaminho();    
 }else{
-$img  = "img" . DIRECTORY_SEPARATOR . $_POST['img'];
+$img  = "img" . DIRECTORY_SEPARATOR . $_FILES['imgUpload']['name'];
 $img  = str_replace(" ","_",$img ); 
 }
 
 $link = $_POST['link'];
-
-  
 $target->edit($id,$titulo,$descricao,$tecnologias,$img,$link);
- 
+header("location: index.php");
 }
 
   
@@ -55,7 +51,7 @@ $target->edit($id,$titulo,$descricao,$tecnologias,$img,$link);
 		#imagemTroca{
 			display:none;
 		}	
-        #id{
+        #theId{
             display: none;
         }
 	</style>
@@ -71,11 +67,11 @@ $target->edit($id,$titulo,$descricao,$tecnologias,$img,$link);
 
 		<h2>Editar item</h2>
 
-		<form method="post">
-
-        <span id="id" ><?php echo $target->getId()?></span>
-		<div class="row">
-
+		<form method="post" enctype="multipart/form-data" id="formPort">
+        
+        <input name="id" id="theId" type="text" value="<?php echo $target->getId()?>">
+		
+        <div class="row">
 			<div class="col-4">
 			<img class="img-fluid" src="../<?php echo $target->getImgCaminho();?>" >
 		</div>
@@ -215,21 +211,8 @@ $(document).ready(function(){
         processData:false
         }); 
 
-            
-        $.ajax({ 
-       // url: "editok.php",   
-        type: "POST",
-        data: "v="+valido+"&id="+theId+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&img="+itemData[3]+"&desc="+itemData[4],
-        dataType: "html",
-        
-    	
-        }).done(function(resposta) {
-        window.location.replace("index.php");
-         
-        })   
-    	
+        $("#formPort").submit();       	
         }
-
         });
      }); 
 

@@ -1,14 +1,15 @@
 <?php
 require_once("config.php");
-if(isset($_POST['v']) && $_POST['v'] == '1'){
+if(isset($_POST['titulo'])){
 $titulo = $_POST['titulo'];
-$tecnologias = $_POST['tec'];
+$tecnologias = $_POST['tecnologias'];
 $link = $_POST['link'];
-$descricao = $_POST['desc'];
-$imgCaminho = "img" . DIRECTORY_SEPARATOR . $_POST['img'];
+$descricao = $_POST['descricao'];
+$imgCaminho = "img" . DIRECTORY_SEPARATOR . $_FILES['imgUpload']['name'];
 $imgCaminho = str_replace(" ","_",$imgCaminho);
 $novoItem = new Portfolio($titulo,$descricao,$tecnologias,$imgCaminho,$link);
 $novoItem->insert();
+header("location: index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@ $novoItem->insert();
 
 		<h2>Inserir item</h2>
 
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" enctype="multipart/form-data" id="formPort">
 		<div class="row">
 		<div class="col-4">
 		<div class="form-group">
@@ -71,7 +72,7 @@ $novoItem->insert();
 		</div>
 		</div>
 
-        <input type="button" id="inserir" class="btn btn-primary btn-block" value="Inserir" >
+        <input type="button" id="inserir" name="insert" class="btn btn-primary btn-block" value="Inserir" >
         </form>
                 <a href="index.php" ><button class="my-3 btn btn-danger btn-block">Voltar</button></a>
 	
@@ -156,15 +157,7 @@ $novoItem->insert();
         }
         });
 
-
-     	$.ajax({
-        type: "POST",
-        data: "v="+valido+"&titulo="+itemData[0]+"&tec="+itemData[1]+"&link="+itemData[2]+"&img="+itemData[3]+"&desc="+itemData[4],
-        dataType: "html"
-        }).done(function(resposta) {
-        window.location.replace("index.php");
-        });
-    	
+        $("#formPort").submit();
         }
 
         });
